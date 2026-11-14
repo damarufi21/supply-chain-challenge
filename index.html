@@ -5,20 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Supply Chain Challenge | Prototipo</title>
 <style>
-:root{--bg:#101a17;--panel:#182722;--panel2:#20352c;--line:#385347;--text:#f1f7f2;--muted:#a9bdb0;--cyan:#76b99a;--gold:#e6bd72;--green:#78c69a;--red:#ed8580}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0%,#294b3b 0,#101a17 46%);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif}
-header{padding:20px clamp(16px,4vw,48px);display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #263b58;background:#101a17e8;position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)}
-.brand{display:flex;gap:12px;align-items:center}.logo{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#8bc9a5,#3f8664);display:grid;place-items:center;font-size:22px;color:#071321;font-weight:900}.brand h1{font-size:16px;letter-spacing:1.5px;margin:0}.brand small{color:var(--muted)}
+:root{--bg:#10182d;--panel:#192443;--panel2:#202f55;--line:#3d4c78;--text:#f7f9fc;--muted:#c0cbd4;--cyan:#7AB641;--gold:#d8e2eb;--green:#7AB641;--red:#ed8580}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0%,#273475 0,#10182d 48%);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif}
+header{padding:20px clamp(16px,4vw,48px);display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #263b58;background:#10182de8;position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)}
+.brand{display:flex;gap:12px;align-items:center}.logo{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#273475,#7AB641);display:grid;place-items:center;font-size:22px;color:#071321;font-weight:900}.brand h1{font-size:16px;letter-spacing:1.5px;margin:0}.brand small{color:var(--muted)}
 main{max-width:1200px;margin:auto;padding:26px clamp(14px,3vw,34px) 60px}.hero{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:22px}.eyebrow{color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase}.hero h2{font-size:clamp(26px,4vw,42px);margin:8px 0}.hero p{color:var(--muted);max-width:650px;line-height:1.5;margin:0}.pill{border:1px solid #3a5976;border-radius:999px;padding:8px 12px;color:#b8d7f0;font-size:12px;white-space:nowrap}
-.grid{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}.panel{background:linear-gradient(160deg,#17263d,#101b2d);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 14px 35px #0002}.panel h3{margin:0 0 14px;font-size:15px}.scene{height:300px;position:relative;overflow:hidden;border-radius:14px;background:linear-gradient(180deg,#668a79,#365c49 62%,#233d31);border:1px solid #31516a}
-#scene3d{width:100%;height:100%;display:block}.scene-label{position:absolute;left:14px;top:12px;background:#12231bd9;padding:8px 11px;border:1px solid #6a9278;border-radius:9px;font-size:11px;color:#d9f6ff}
-.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.metric{background:#14231d;border:1px solid #385347;border-radius:12px;padding:12px}.metric small{display:block;color:var(--muted);font-size:11px}.metric strong{display:block;font-size:20px;margin-top:6px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{margin:12px 0}.field label{display:block;color:#b8c9dc;font-size:12px;margin-bottom:6px}.field input,.field select{width:100%;padding:11px 12px;background:#122019;border:1px solid #52745f;border-radius:9px;color:var(--text);font-size:14px}
-button{border:0;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,#8bc9a5,#5eaa7d);color:#071b25}button.secondary{background:#223650;color:#e8f3ff;border:1px solid #3a5674}button.warn{background:#5b3e27;color:#ffe0ae;border:1px solid #8a633b}button:disabled{opacity:.45;cursor:not-allowed}
-.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.team-list{display:grid;gap:9px}.team{display:flex;justify-content:space-between;align-items:center;background:#14231d;border:1px solid #263d58;border-radius:11px;padding:11px 12px}.team b{font-size:13px}.team small{color:var(--muted)}
-.hidden{display:none!important}.section{margin-top:18px}.stage-list{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}.stage{background:#14231d;border:1px solid #263d58;border-radius:12px;padding:12px;min-height:95px}.stage span{font-size:20px}.stage b{display:block;font-size:12px;margin:7px 0 3px}.stage small{color:var(--muted);font-size:10px;line-height:1.35}
+.grid{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}.panel{background:linear-gradient(160deg,#17263d,#101b2d);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 14px 35px #0002}.panel h3{margin:0 0 14px;font-size:15px}.scene{height:300px;position:relative;overflow:hidden;border-radius:14px;background:linear-gradient(180deg,#6e8497,#354a72 62%,#202f55);border:1px solid #31516a}
+#scene3d{width:100%;height:100%;display:block}.scene-label{position:absolute;left:14px;top:12px;background:#17264bd9;padding:8px 11px;border:1px solid #7AB641;border-radius:9px;font-size:11px;color:#d9f6ff}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.metric{background:#192443;border:1px solid #3d4c78;border-radius:12px;padding:12px}.metric small{display:block;color:var(--muted);font-size:11px}.metric strong{display:block;font-size:20px;margin-top:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{margin:12px 0}.field label{display:block;color:#b8c9dc;font-size:12px;margin-bottom:6px}.field input,.field select{width:100%;padding:11px 12px;background:#111c36;border:1px solid #53658e;border-radius:9px;color:var(--text);font-size:14px}
+button{border:0;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,#7AB641,#9acb69);color:#071b25}button.secondary{background:#223650;color:#e8f3ff;border:1px solid #3a5674}button.warn{background:#5b3e27;color:#ffe0ae;border:1px solid #8a633b}button:disabled{opacity:.45;cursor:not-allowed}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.team-list{display:grid;gap:9px}.team{display:flex;justify-content:space-between;align-items:center;background:#192443;border:1px solid #263d58;border-radius:11px;padding:11px 12px}.team b{font-size:13px}.team small{color:var(--muted)}
+.hidden{display:none!important}.section{margin-top:18px}.stage-list{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}.stage{background:#192443;border:1px solid #263d58;border-radius:12px;padding:12px;min-height:95px}.stage span{font-size:20px}.stage b{display:block;font-size:12px;margin:7px 0 3px}.stage small{color:var(--muted);font-size:10px;line-height:1.35}
 .notice{border-left:3px solid var(--gold);padding:10px 12px;background:#342b1d66;color:#f8ddb0;border-radius:0 9px 9px 0;font-size:12px;line-height:1.5}
-.roundbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.roundbar strong{font-size:20px}.decision{display:grid;grid-template-columns:1fr 1fr;gap:12px}.decision-card{background:#14231d;border:1px solid #456650;border-radius:12px;padding:14px}.decision-card h4{margin:0 0 8px}.decision-card p{font-size:12px;color:var(--muted);line-height:1.45}.decision-card select{width:100%;padding:10px;background:#1b3025;color:white;border:1px solid #52745f;border-radius:8px}
+.roundbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.roundbar strong{font-size:20px}.decision{display:grid;grid-template-columns:1fr 1fr;gap:12px}.decision-card{background:#192443;border:1px solid #53658e;border-radius:12px;padding:14px}.decision-card h4{margin:0 0 8px}.decision-card p{font-size:12px;color:var(--muted);line-height:1.45}.decision-card select{width:100%;padding:10px;background:#202f55;color:white;border:1px solid #53658e;border-radius:8px}
 .log{max-height:180px;overflow:auto;font-size:12px;color:#c4d3e4;line-height:1.6}.log div{border-bottom:1px solid #263b58;padding:6px 0}
 footer{color:#7890aa;font-size:11px;text-align:center;margin-top:28px}
 @media(max-width:850px){.grid{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}.stage-list{grid-template-columns:repeat(2,1fr)}.decision{grid-template-columns:1fr}.hero{display:block}.pill{display:inline-block;margin-top:12px}}
@@ -84,9 +84,10 @@ footer{color:#7890aa;font-size:11px;text-align:center;margin-top:28px}
  <section class="panel"><h3>🏆 Clasificación empresarial</h3><div id="leaderboard" class="team-list"><div style="color:var(--muted);font-size:12px">Aún no hay equipos registrados.</div></div></section>
  <section class="panel"><h3>📋 Bitácora de operaciones</h3><div id="log" class="log"><div>Bienvenido. Crea tu primera empresa para comenzar.</div></div></section>
 </div>
-<footer>Prototipo académico · Valores ficticios para fines de aprendizaje · La modalidad en línea entre distintos dispositivos se incorporará en una siguiente fase.</footer>
+<footer>Prototipo académico UNIPAZ · Modelo GLB externo cargado desde assets/models/warehouse.glb · Valores ficticios para fines de aprendizaje.</footer>
 </main>
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.146.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.146.0/examples/js/loaders/GLTFLoader.js"></script>
 <script>
 const KEY='scc_prototype_01';
 let state=JSON.parse(localStorage.getItem(KEY)||'null')||{started:false,round:1,teams:[],active:0,logs:[],events:[]};
@@ -166,7 +167,7 @@ if(state.teams.length&&state.active>=state.teams.length)state.active=0;render();
  if(!window.THREE){canvas.style.display='none';canvas.parentElement.style.background='linear-gradient(135deg,#456b55,#172d22)';return}
  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
  renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
- const scene=new THREE.Scene();scene.background=new THREE.Color('#426653');scene.fog=new THREE.Fog('#426653',22,48);
+ const scene=new THREE.Scene();scene.background=new THREE.Color('#35466f');scene.fog=new THREE.Fog('#35466f',22,48);
  const camera=new THREE.PerspectiveCamera(38,1,.1,100);
  const overviewPos=new THREE.Vector3(13,13,17),detailPos=new THREE.Vector3(5.5,7.5,9);
  const overviewLook=new THREE.Vector3(0,0,0),detailLook=new THREE.Vector3(1,0,-1);
@@ -175,25 +176,58 @@ if(state.teams.length&&state.active>=state.teams.length)state.active=0;render();
  scene.add(new THREE.HemisphereLight(0xe5f3e8,0x344b3b,2));
  const sun=new THREE.DirectionalLight(0xfff4df,2.5);sun.position.set(-8,15,10);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);scene.add(sun);
  const mat=c=>new THREE.MeshStandardMaterial({color:c,roughness:.78});
- const concrete=mat('#9aa59a'),road=mat('#424d48'),white=mat('#e4e9df'),green=mat('#47765b'),roof=mat('#52665c'),metal=mat('#71817a'),wood=mat('#a77d4e'),yellow=mat('#d9ad4f'),blue=mat('#527c83');
+ const concrete=mat('#c5ccd1'),road=mat('#424d48'),white=mat('#e4e9df'),green=mat('#7AB641'),roof=mat('#273475'),metal=mat('#71817a'),wood=mat('#a77d4e'),yellow=mat('#d9ad4f'),blue=mat('#ABB8C3');
  function block(x,y,z,w,h,d,m){const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;scene.add(o);return o}
  function cyl(x,y,z,r,h,m){const o=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,16),m);o.position.set(x,y,z);o.castShadow=true;scene.add(o)}
- block(0,-.28,0,23,.35,15,concrete);block(0,-.08,0,23,.06,15,mat('#617b65'));
+ block(0,-.28,0,23,.35,15,concrete);block(0,-.08,0,23,.06,15,mat('#7AB641'));
  block(0,-.035,1.5,22,.05,1.45,road);block(-2.8,-.025,-.5,1.25,.06,10,road);
  for(let x=-10;x<11;x+=2.2)block(x,0,1.5,.95,.018,.045,white);
  // Proveedor
  block(-7,.55,-3,3.1,1.1,2.5,green);block(-7,1.18,-3,3.2,.18,2.6,roof);
  for(let i=0;i<4;i++){block(-8.1+i*.65,.16,-1.15,.48,.3,.42,wood);block(-8.1+i*.65,.36,-1.15,.48,.08,.42,yellow)}
  // Planta de producción
- block(-2.3,.9,-3.3,4.2,1.8,3.2,mat('#b8c4b8'));block(-2.3,1.86,-3.3,4.35,.18,3.35,roof);
+ block(-2.3,.9,-3.3,4.2,1.8,3.2,mat('#e4e9ed'));block(-2.3,1.86,-3.3,4.35,.18,3.35,roof);
  block(-3.35,2.45,-3.7,.5,1.1,.55,metal);block(-1.4,2.25,-3.5,.45,.7,.45,metal);
  for(let x=-3.8;x<-.5;x+=.8)block(x,1.05,-1.67,.48,.55,.04,blue);
- // Almacén
- block(3.6,.75,-3.2,3.6,1.5,3,mat('#d0d5c9'));block(3.6,1.57,-3.2,3.75,.18,3.15,roof);
- for(let x=2.4;x<=4.8;x+=1.2){block(x,.52,-1.66,.72,.85,.08,green);block(x,.55,-1.60,.55,.62,.035,metal)}
- for(let row=0;row<2;row++)for(let col=0;col<3;col++){let x=2.3+col*.85,z=-.5+row*.7;block(x,.25,z,.58,.42,.5,wood);block(x,.62,z,.58,.28,.5,yellow)}
+ // Almacén real: se carga desde assets/models/warehouse.glb en GitHub Pages.
+ const warehouseMarker = $('scene3d').parentElement.querySelector('.scene-label');
+ if (warehouseMarker) warehouseMarker.textContent = 'CARGANDO ALMACÉN INDUSTRIAL 3D...';
+ if (THREE.GLTFLoader) {
+   const loader = new THREE.GLTFLoader();
+   loader.load('assets/models/warehouse.glb', function(gltf) {
+     const model = gltf.scene;
+     model.updateMatrixWorld(true);
+     const bounds = new THREE.Box3().setFromObject(model);
+     const size = bounds.getSize(new THREE.Vector3());
+     const center = bounds.getCenter(new THREE.Vector3());
+     const maxDim = Math.max(size.x, size.y, size.z) || 1;
+     const targetSize = 4.0;
+     model.scale.setScalar(targetSize / maxDim);
+     model.position.set(-center.x * model.scale.x + 3.6,
+                        -bounds.min.y * model.scale.y,
+                        -center.z * model.scale.z - 3.2);
+     model.traverse(function(node) {
+       if (node.isMesh) {
+         node.castShadow = true;
+         node.receiveShadow = true;
+       }
+     });
+     scene.add(model);
+     if (warehouseMarker) warehouseMarker.textContent = 'ALMACÉN REAL · MODELO GLB CARGADO';
+   }, undefined, function(error) {
+     console.error('No se pudo cargar warehouse.glb:', error);
+     if (warehouseMarker) warehouseMarker.textContent = 'ALMACÉN 3D · REVISAR ARCHIVO';
+   });
+ } else if (warehouseMarker) {
+   warehouseMarker.textContent = 'CARGADOR GLB NO DISPONIBLE';
+ }
+ // Racks y pallets auxiliares frente al muelle
+ for(let row=0;row<2;row++)for(let col=0;col<3;col++){
+   let x=2.3+col*.85,z=-.5+row*.7;
+   block(x,.25,z,.58,.42,.5,wood);block(x,.62,z,.58,.28,.5,yellow);
+ }
  // Patio de contenedores
- const cm=[mat('#426b57'),mat('#6c7770'),mat('#8b6548'),mat('#466b7d')];
+ const cm=[mat('#273475'),mat('#6c7770'),mat('#8b6548'),mat('#7AB641')];
  for(let i=0;i<4;i++){let x=6.3+(i%2)*1.25,z=-.3+Math.floor(i/2)*1.45;block(x,.48,z,1.12,.95,1.28,cm[i]);for(let r=0;r<7;r++)block(x-.48+r*.16,.49,z-.66,.025,.85,.025,metal)}
  // Muelle, buque y grúa
  block(7.2,-.02,4.1,5.4,.22,2.2,mat('#596d66'));block(7.2,-.12,6.1,5.5,.1,2,mat('#315d70'));
@@ -203,7 +237,7 @@ if(state.teams.length&&state.active>=state.teams.length)state.active=0;render();
  block(-1,.38,1.45,1.75,.62,.78,green);block(-1.72,.53,1.45,.58,.78,.78,white);
  for(const x of [-1.62,-.85])for(const z of [1.02,1.88]){const w=new THREE.Mesh(new THREE.CylinderGeometry(.22,.22,.16,18),mat('#202a26'));w.rotation.z=Math.PI/2;w.position.set(x,.16,z);scene.add(w)}
  // Vegetación de borde
- for(let i=0;i<8;i++){let x=-10+i*2.8;cyl(x,.2,5.7,.09,.4,wood);const crown=new THREE.Mesh(new THREE.SphereGeometry(.48,10,8),mat('#477b51'));crown.position.set(x,.72,5.7);scene.add(crown)}
+ for(let i=0;i<8;i++){let x=-10+i*2.8;cyl(x,.2,5.7,.09,.4,wood);const crown=new THREE.Mesh(new THREE.SphereGeometry(.48,10,8),mat('#7AB641'));crown.position.set(x,.72,5.7);scene.add(crown)}
  function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
  window.addEventListener('resize',resize);resize();
  $('overviewCam').onclick=()=>{targetPos=overviewPos.clone();targetLook=overviewLook.clone()};
