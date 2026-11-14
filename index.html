@@ -3,258 +3,135 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Supply Chain Challenge | Prototipo</title>
+<title>Supply Chain Challenge | UNIPAZ</title>
 <style>
-:root{--bg:#10182d;--panel:#192443;--panel2:#202f55;--line:#3d4c78;--text:#f7f9fc;--muted:#c0cbd4;--cyan:#7AB641;--gold:#d8e2eb;--green:#7AB641;--red:#ed8580}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0%,#273475 0,#10182d 48%);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif}
-header{padding:20px clamp(16px,4vw,48px);display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #263b58;background:#10182de8;position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)}
-.brand{display:flex;gap:12px;align-items:center}.logo{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#273475,#7AB641);display:grid;place-items:center;font-size:22px;color:#071321;font-weight:900}.brand h1{font-size:16px;letter-spacing:1.5px;margin:0}.brand small{color:var(--muted)}
-main{max-width:1200px;margin:auto;padding:26px clamp(14px,3vw,34px) 60px}.hero{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:22px}.eyebrow{color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase}.hero h2{font-size:clamp(26px,4vw,42px);margin:8px 0}.hero p{color:var(--muted);max-width:650px;line-height:1.5;margin:0}.pill{border:1px solid #3a5976;border-radius:999px;padding:8px 12px;color:#b8d7f0;font-size:12px;white-space:nowrap}
-.grid{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}.panel{background:linear-gradient(160deg,#17263d,#101b2d);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 14px 35px #0002}.panel h3{margin:0 0 14px;font-size:15px}.scene{height:300px;position:relative;overflow:hidden;border-radius:14px;background:linear-gradient(180deg,#6e8497,#354a72 62%,#202f55);border:1px solid #31516a}
-#scene3d{width:100%;height:100%;display:block}.scene-label{position:absolute;left:14px;top:12px;background:#17264bd9;padding:8px 11px;border:1px solid #7AB641;border-radius:9px;font-size:11px;color:#d9f6ff}
-.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.metric{background:#192443;border:1px solid #3d4c78;border-radius:12px;padding:12px}.metric small{display:block;color:var(--muted);font-size:11px}.metric strong{display:block;font-size:20px;margin-top:6px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{margin:12px 0}.field label{display:block;color:#b8c9dc;font-size:12px;margin-bottom:6px}.field input,.field select{width:100%;padding:11px 12px;background:#111c36;border:1px solid #53658e;border-radius:9px;color:var(--text);font-size:14px}
-button{border:0;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,#7AB641,#9acb69);color:#071b25}button.secondary{background:#223650;color:#e8f3ff;border:1px solid #3a5674}button.warn{background:#5b3e27;color:#ffe0ae;border:1px solid #8a633b}button:disabled{opacity:.45;cursor:not-allowed}
-.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.team-list{display:grid;gap:9px}.team{display:flex;justify-content:space-between;align-items:center;background:#192443;border:1px solid #263d58;border-radius:11px;padding:11px 12px}.team b{font-size:13px}.team small{color:var(--muted)}
-.hidden{display:none!important}.section{margin-top:18px}.stage-list{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}.stage{background:#192443;border:1px solid #263d58;border-radius:12px;padding:12px;min-height:95px}.stage span{font-size:20px}.stage b{display:block;font-size:12px;margin:7px 0 3px}.stage small{color:var(--muted);font-size:10px;line-height:1.35}
-.notice{border-left:3px solid var(--gold);padding:10px 12px;background:#342b1d66;color:#f8ddb0;border-radius:0 9px 9px 0;font-size:12px;line-height:1.5}
-.roundbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.roundbar strong{font-size:20px}.decision{display:grid;grid-template-columns:1fr 1fr;gap:12px}.decision-card{background:#192443;border:1px solid #53658e;border-radius:12px;padding:14px}.decision-card h4{margin:0 0 8px}.decision-card p{font-size:12px;color:var(--muted);line-height:1.45}.decision-card select{width:100%;padding:10px;background:#202f55;color:white;border:1px solid #53658e;border-radius:8px}
-.log{max-height:180px;overflow:auto;font-size:12px;color:#c4d3e4;line-height:1.6}.log div{border-bottom:1px solid #263b58;padding:6px 0}
-footer{color:#7890aa;font-size:11px;text-align:center;margin-top:28px}
-@media(max-width:850px){.grid{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}.stage-list{grid-template-columns:repeat(2,1fr)}.decision{grid-template-columns:1fr}.hero{display:block}.pill{display:inline-block;margin-top:12px}}
-@media(max-width:850px){.grid{grid-template-columns:1fr}.stage-list{grid-template-columns:repeat(2,1fr)}.metrics{grid-template-columns:repeat(2,1fr)}.decision{grid-template-columns:1fr}.hero{flex-direction:column;align-items:flex-start}header{gap:12px;flex-wrap:wrap}}
+:root{--navy:#273475;--green:#7ab641;--ink:#172033;--muted:#667085;--panel:#fff;--line:#dce2ea;--bg:#eef2f5}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:#101827;color:var(--ink)}
+button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:9px;padding:11px 15px;font-weight:700}
+.primary{background:var(--green);color:#10220b}.secondary{background:#e9edf5;color:var(--navy)}.dark{background:var(--navy);color:white}.danger{background:#fee4e2;color:#b42318}
+#app{min-height:100vh;position:relative;overflow:hidden;background:#172334}
+#scene{position:fixed;inset:0;width:100%;height:100%;display:block}
+.vignette{position:fixed;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(9,18,33,.9) 0%,rgba(9,18,33,.58) 40%,rgba(9,18,33,.08) 100%),linear-gradient(0deg,rgba(7,14,26,.6),transparent 45%)}
+header{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:17px 24px;color:#fff;border-bottom:1px solid #ffffff24;background:#0b1424a8;backdrop-filter:blur(10px)}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.4px}.mark{width:38px;height:38px;border-radius:10px;background:var(--green);display:grid;place-items:center;color:#17220e;font-size:21px}.brand small{display:block;color:#b9c3d1;font-size:10px;letter-spacing:1.7px;margin-top:3px}
+.topright{display:flex;gap:10px;align-items:center;font-size:12px;color:#dbe3ef}.live{display:inline-flex;gap:7px;align-items:center}.dot{width:8px;height:8px;border-radius:50%;background:#7ab641;box-shadow:0 0 12px #7ab641}
+main{position:relative;z-index:2;display:grid;grid-template-columns:minmax(320px,430px) 1fr;gap:22px;padding:28px 24px 35px;min-height:calc(100vh - 72px)}
+.left{display:flex;flex-direction:column;gap:14px;max-width:430px}.eyebrow{font-size:11px;letter-spacing:2px;color:#b6c4d6;font-weight:800}.hero h1{font-size:clamp(30px,4vw,48px);line-height:1.02;color:white;margin:10px 0}.hero p{color:#d2dae5;line-height:1.55;margin:0 0 8px}.panel{background:#fff;border:1px solid #ffffff70;border-radius:16px;padding:18px;box-shadow:0 18px 45px #07111f55}.panel h2{margin:0 0 5px;font-size:19px;color:var(--navy)}.sub{font-size:12px;color:var(--muted);margin:0 0 15px;line-height:1.45}
+label{display:block;font-size:12px;font-weight:800;color:#344054;margin:11px 0 5px}input,select{width:100%;padding:11px 12px;border:1px solid #cfd6e1;border-radius:8px;background:#fff;color:#172033;outline:none}input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px #7ab64122}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}.actions button{flex:1}
+.hint{font-size:11px;color:#667085;margin-top:10px;line-height:1.4}
+#game{display:none;grid-template-columns:minmax(0,1fr) 300px;gap:16px;align-items:start}
+.stage{background:#ffffffed;border-radius:16px;padding:18px;box-shadow:0 18px 45px #07111f55}.stagehead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.stagehead h2{margin:0;color:var(--navy);font-size:21px}.stagehead p{margin:5px 0 0;color:var(--muted);font-size:12px}.round{background:#edf5e6;color:#3f6c1b;padding:8px 10px;border-radius:8px;font-size:11px;font-weight:900;white-space:nowrap}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:15px 0}.metric{background:#f2f5f8;border-radius:10px;padding:10px}.metric span{display:block;font-size:10px;color:#667085}.metric b{display:block;margin-top:5px;font-size:17px;color:#1d2939}
+.stepnav{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}.stepnav button{background:#edf0f5;color:#526078;padding:8px 10px;font-size:11px}.stepnav button.active{background:var(--navy);color:white}
+.stagebody{border-top:1px solid var(--line);padding-top:15px}.stagebody h3{font-size:16px;margin:0 0 6px;color:#1d2939}.stagebody p{font-size:12px;color:#667085;line-height:1.5;margin:0 0 12px}
+.choicegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.choice{border:1px solid #d9e0e8;border-radius:10px;padding:12px;background:#fff;text-align:left;color:#263248}.choice strong{display:block;font-size:13px;margin-bottom:4px}.choice span{font-size:11px;color:#667085;line-height:1.4}.choice.selected{border:2px solid var(--green);background:#f6fbf1;padding:11px}
+.fieldrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}.result{margin-top:13px;padding:12px;border-radius:10px;background:#f1f6eb;font-size:12px;line-height:1.5;color:#344d20}
+.sidecol{display:flex;flex-direction:column;gap:12px}.sidecard{background:#fff;border-radius:14px;padding:15px;box-shadow:0 14px 35px #07111f44}.sidecard h3{margin:0 0 10px;color:var(--navy);font-size:14px}.order{padding:10px;border-radius:9px;background:#f4f6f8;margin:7px 0;font-size:11px;line-height:1.45}.order b{display:block;color:#344054;margin-bottom:3px}.log{font-size:11px;color:#667085;line-height:1.6;max-height:130px;overflow:auto}.sidebuttons{display:grid;grid-template-columns:1fr 1fr;gap:8px}.sidebuttons button{font-size:11px;padding:10px 8px}
+#toast{position:fixed;z-index:10;bottom:20px;left:50%;transform:translateX(-50%);background:#101828;color:#fff;padding:12px 18px;border-radius:10px;box-shadow:0 8px 30px #0005;display:none;font-size:13px}
+.modalback{position:fixed;inset:0;background:#07111fcc;z-index:8;display:none;align-items:center;justify-content:center;padding:18px}.modal{background:#fff;border-radius:16px;max-width:650px;width:100%;max-height:85vh;overflow:auto;padding:22px}.modal h2{color:var(--navy);margin:0 0 8px}.modal table{width:100%;border-collapse:collapse;font-size:12px}.modal td,.modal th{padding:9px;border-bottom:1px solid #e5e7eb;text-align:left}
+footer{position:relative;z-index:2;color:#d0d8e4;font-size:10px;padding:0 25px 15px;letter-spacing:.5px}
+@media(max-width:950px){main{grid-template-columns:1fr;padding:18px}.left{max-width:none}#game{grid-template-columns:1fr}.sidecol{display:grid;grid-template-columns:1fr 1fr}header{padding:13px 17px}}
+@media(max-width:560px){.topright .hide{display:none}.metrics{grid-template-columns:1fr 1fr}.choicegrid,.fieldrow{grid-template-columns:1fr}.sidecol{grid-template-columns:1fr}.hero h1{font-size:34px}}
 </style>
 </head>
 <body>
-<header><div class="brand"><div class="logo">SC</div><div><h1>SUPPLY CHAIN CHALLENGE</h1><small>Laboratorio de simulación empresarial</small></div></div><div class="pill">PROTOTIPO JUGABLE 1.0 · UNIPAZ</div></header>
+<div id="app">
+<canvas id="scene"></canvas><div class="vignette"></div>
+<header>
+ <div class="brand"><div class="mark">↗</div><div>SUPPLY CHAIN CHALLENGE<small>SIMULADOR LOGÍSTICO · UNIPAZ</small></div></div>
+ <div class="topright"><span class="live"><i class="dot"></i> SIMULACIÓN ACTIVA</span><span class="hide">| CAMPUS VIRTUAL</span></div>
+</header>
 <main>
-<section class="hero"><div><div class="eyebrow">Build it · Move it · Deliver it</div><h2>Dirige tu cadena.<br><span style="color:var(--cyan)">Conquista el mercado.</span></h2><p>Administra una empresa completa: abastece, produce, almacena, transporta y entrega. Cada decisión afecta el dinero, el tiempo y la satisfacción de tus clientes.</p></div><div class="pill">Modo aula · Equipos por turnos · 10 rondas</div></section>
-<div class="grid">
- <section class="panel">
-  <h3>🌐 Tu ecosistema logístico</h3>
-  <div class="scene"><canvas id="scene3d"></canvas><div class="scene-label">ENTORNO INDUSTRIAL · 3D</div></div>
-  <div class="actions" style="margin-top:10px"><button class="secondary" id="overviewCam">Vista general</button><button class="secondary" id="detailCam">Acercar instalaciones</button></div>
-  <div class="metrics">
-   <div class="metric"><small>Capital disponible</small><strong id="money">$500 M</strong></div>
-   <div class="metric"><small>Inventario</small><strong id="stock">0 u.</strong></div>
-   <div class="metric"><small>Pedidos pendientes</small><strong id="orders">0</strong></div>
-   <div class="metric"><small>Reputación</small><strong id="rep">70/100</strong></div>
+ <section class="left" id="welcome">
+  <div class="hero"><div class="eyebrow">APRENDE · DECIDE · TRANSFORMA</div><h1>Dirige una empresa.<br>Conquista el mercado.</h1><p>Diseña tu operación logística desde el proveedor hasta el cliente. Cada decisión tiene un costo, un riesgo y una consecuencia.</p></div>
+  <div class="panel">
+   <h2>Crear nueva empresa</h2><p class="sub">Tu equipo será responsable de tomar las decisiones y responder por los resultados.</p>
+   <label for="company">Nombre de la empresa</label><input id="company" placeholder="Ej. Logística del Magdalena"/>
+   <div class="grid2"><div><label for="product">Producto</label><select id="product"><option value="sacha">Sacha inchi</option><option value="miel">Miel</option><option value="yuca">Harina de yuca</option><option value="rambutan">Rambután</option><option value="caucho">Caucho natural</option><option value="pescado">Pescado fresco</option></select></div><div><label for="market">Mercado destino</label><select id="market"><option>Colombia</option><option>Canadá</option><option>Chile</option><option>Alemania</option><option>Corea del Sur</option><option>Australia</option><option>Marruecos</option></select></div></div>
+   <div class="grid2"><div><label for="capital">Capital inicial (COP)</label><select id="capital"><option value="100000000"> $100 millones</option><option value="150000000" selected>$150 millones</option><option value="200000000">$200 millones</option></select></div><div><label for="team">Equipo / grupo</label><input id="team" placeholder="Ej. Grupo 1"/></div></div>
+   <div class="actions"><button class="primary" onclick="startGame()">INICIAR EMPRESA →</button><button class="secondary" onclick="showGuide()">¿CÓMO SE JUEGA?</button></div>
+   <div class="hint">Prototipo académico: una empresa por navegador. Guarda el avance en este dispositivo.</div>
   </div>
  </section>
- <section class="panel">
-  <h3>🏢 Configuración de la partida</h3>
-  <div id="setup">
-   <div class="field"><label>Nombre de la empresa</label><input id="company" value="EcoNova Industries" maxlength="32"></div>
-   <div class="field"><label>Sector de operación</label><select id="sector"><option>Alimentos y agroindustria</option><option>Manufactura</option><option>Comercio y distribución</option><option>Tecnología y electrónica</option><option>Textil y confecciones</option><option>Personalizado / multisector</option></select></div>
-   <div class="two"><div class="field"><label>Nombre del equipo</label><input id="teamname" value="Equipo 1" maxlength="24"></div><div class="field"><label>Integrantes</label><input id="members" placeholder="Nombres separados por coma"></div></div>
-   <div class="actions"><button id="createTeam">Crear empresa / equipo</button><button class="secondary" id="startGame">Iniciar partida</button></div>
-   <p style="font-size:11px;color:var(--muted);line-height:1.5">La partida se guarda en este navegador. Puedes crear varios equipos y jugar por turnos desde el mismo computador.</p>
+ <section id="game">
+  <div class="stage">
+   <div class="stagehead"><div><h2 id="companyTitle">Empresa</h2><p id="companyMeta">Operación logística</p></div><div class="round" id="roundLabel">RONDA 1 DE 5</div></div>
+   <div class="metrics">
+    <div class="metric"><span>Capital disponible</span><b id="cash">$0</b></div><div class="metric"><span>Inventario</span><b id="stock">0 u.</b></div><div class="metric"><span>Pedidos atendidos</span><b id="served">0%</b></div><div class="metric"><span>Resultado acumulado</span><b id="profit">$0</b></div>
+   </div>
+   <div class="stepnav" id="stepnav">
+    <button class="active" onclick="goStep(0)">1 · Compras</button><button onclick="goStep(1)">2 · Producción</button><button onclick="goStep(2)">3 · Almacén</button><button onclick="goStep(3)">4 · Transporte</button><button onclick="goStep(4)">5 · Entrega</button>
+   </div>
+   <div class="stagebody" id="stagebody"></div>
   </div>
-  <div id="gameInfo" class="hidden">
-   <div class="roundbar"><div><small style="color:var(--muted)">RONDA ACTUAL</small><br><strong id="round">1 / 10</strong></div><div class="pill" id="activeTeam">Equipo 1</div></div>
-   <div class="field"><label>Empresa activa</label><select id="teamSelect"></select></div>
-   <div class="notice" id="eventText">Mercado estable. Es momento de planificar tu operación.</div>
-   <div class="actions"><button id="nextRound">Cerrar turno y avanzar</button><button class="secondary" id="saveGame">Guardar avance</button><button class="secondary" id="exportCSV">Exportar resultados CSV</button></div>
-   <div class="actions"><button class="warn" id="resetGame">Reiniciar partida</button></div>
-  </div>
+  <aside class="sidecol">
+   <div class="sidecard"><h3>📦 Pedido del mercado</h3><div class="order" id="marketOrder"><b>Demanda de la ronda</b>El mercado espera tu producto.</div><div class="order"><b>Objetivo de la empresa</b>Atender la demanda con rentabilidad y cumplimiento.</div></div>
+   <div class="sidecard"><h3>📊 Estado de la operación</h3><div class="log" id="log">La empresa está lista para iniciar.</div></div>
+   <div class="sidecard"><h3>Herramientas</h3><div class="sidebuttons"><button class="secondary" onclick="showReport()">Ver resultados</button><button class="secondary" onclick="saveGame()">Guardar avance</button><button class="secondary" onclick="exportData()">Exportar CSV</button><button class="danger" onclick="newGame()">Nueva empresa</button></div></div>
+  </aside>
  </section>
-</div>
-<section class="panel section">
- <h3>🧭 Áreas de la cadena de suministro</h3>
- <div class="stage-list">
-  <div class="stage"><span>🤝</span><b>1. Abastecimiento</b><small>Proveedores, compras y aprovisionamiento.</small></div>
-  <div class="stage"><span>🏭</span><b>2. Producción</b><small>Capacidad, programación y calidad.</small></div>
-  <div class="stage"><span>📦</span><b>3. Almacenamiento</b><small>Inventarios, espacio y rotación.</small></div>
-  <div class="stage"><span>🚚</span><b>4. Transporte</b><small>Rutas, modos y costos logísticos.</small></div>
-  <div class="stage"><span>🛒</span><b>5. Distribución</b><small>Pedidos, entregas y servicio al cliente.</small></div>
- </div>
-</section>
-<section class="panel section"><h3>📘 Cómo jugar</h3><p style="color:var(--muted);font-size:13px;line-height:1.7">1. Crea una empresa por equipo y pulsa <b>Iniciar partida</b>. 2. El equipo activo selecciona cuatro decisiones. 3. Pulsa <b>Aplicar decisiones</b> y revisa los resultados. 4. Pulsa <b>Cerrar turno y avanzar</b> para pasar al siguiente equipo. 5. Cuando todos hayan participado, comienza una nueva ronda. Al terminar las diez rondas, consulta y exporta la clasificación. Los valores son ficticios y sirven para analizar decisiones, no para representar costos reales.</p><div class="notice">La partida y los resultados se guardan únicamente en este navegador. Los equipos juegan por turnos en el mismo dispositivo; todavía no existe multijugador en línea ni panel docente remoto.</div></section>
-<section class="panel section" id="decisions">
- <h3>🎯 Centro de decisiones</h3>
- <p style="color:var(--muted);font-size:13px;margin-top:-5px">Inicia una partida para habilitar las decisiones operativas de cada ronda.</p>
- <div class="decision">
-  <div class="decision-card"><h4>🤝 Abastecimiento</h4><p>Selecciona una estrategia de compra. Un proveedor económico puede implicar mayor plazo o riesgo.</p><select id="buy"><option value="balanced">Compra equilibrada · $45 M</option><option value="cheap">Compra económica · $32 M</option><option value="fast">Compra urgente · $58 M</option></select></div>
-  <div class="decision-card"><h4>🏭 Producción</h4><p>Define el ritmo de fabricación según capacidad, inventario y demanda.</p><select id="produce"><option value="normal">Producción normal · 500 unidades</option><option value="high">Producción intensiva · 750 unidades</option><option value="low">Producción reducida · 300 unidades</option></select></div>
-  <div class="decision-card"><h4>📦 Inventarios</h4><p>Elige cómo administrar el almacenamiento y el riesgo de faltantes.</p><select id="inventory"><option value="standard">Control estándar · costo $8 M</option><option value="lean">Inventario ajustado · costo $4 M</option><option value="buffer">Stock de seguridad · costo $13 M</option></select></div>
-  <div class="decision-card"><h4>🚚 Transporte y distribución</h4><p>Prioriza el costo o la velocidad para cumplir con los pedidos.</p><select id="transport"><option value="road">Carretera · costo $18 M · 4 días</option><option value="express">Exprés · costo $27 M · 2 días</option><option value="economy">Consolidado · costo $12 M · 7 días</option></select></div>
- </div>
- <div class="actions"><button id="applyDecisions" disabled>Aplicar decisiones de esta ronda</button></div>
- <div id="decisionResult" class="notice hidden" style="margin-top:12px"></div>
-</section>
-<div class="grid section">
- <section class="panel"><h3>🏆 Clasificación empresarial</h3><div id="leaderboard" class="team-list"><div style="color:var(--muted);font-size:12px">Aún no hay equipos registrados.</div></div></section>
- <section class="panel"><h3>📋 Bitácora de operaciones</h3><div id="log" class="log"><div>Bienvenido. Crea tu primera empresa para comenzar.</div></div></section>
-</div>
-<footer>Supply Chain Challenge · Prototipo jugable 1.0 · Uso académico · Resultados locales y valores ficticios · Escenario 3D experimental.</footer>
 </main>
-<script src="https://cdn.jsdelivr.net/npm/three@0.146.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.146.0/examples/js/loaders/GLTFLoader.js"></script>
+<footer>UNIPAZ · ADMINISTRACIÓN DE NEGOCIOS INTERNACIONALES · SUPPLY CHAIN CHALLENGE</footer>
+</div>
+<div id="toast"></div>
+<div class="modalback" id="modal" onclick="if(event.target===this)closeModal()"><div class="modal" id="modalContent"></div></div>
 <script>
-const KEY='scc_prototype_01'; // Se conserva la clave para no perder partidas anteriores
-let state=JSON.parse(localStorage.getItem(KEY)||'null')||{started:false,round:1,teams:[],active:0,logs:[],events:[]};
-const $=id=>document.getElementById(id);
-const fmt=n=>'$'+Math.round(n).toLocaleString('es-CO')+' M';
-function log(msg){state.logs.unshift('R'+state.round+' · '+msg);state.logs=state.logs.slice(0,30);renderLog()}
-function save(){localStorage.setItem(KEY,JSON.stringify(state));}
-function active(){return state.teams[state.active]}
-function render(){
- const t=active();
- $('setup').classList.toggle('hidden',state.started);
- $('gameInfo').classList.toggle('hidden',!state.started);
- $('money').textContent=t?fmt(t.money):'$500 M';$('stock').textContent=(t?t.stock:0).toLocaleString('es-CO')+' u.';
- $('orders').textContent=t?t.orders:0;$('rep').textContent=(t?t.rep:70)+'/100';
- $('round').textContent=state.round+' / 10'+(state.finished?' · FINALIZADA':'');
- $('activeTeam').textContent=t?t.name:'Sin equipo';
- $('teamSelect').innerHTML=state.teams.map((x,i)=>`<option value="${i}" ${i===state.active?'selected':''}>${x.name}</option>`).join('');
- $('applyDecisions').disabled=!state.started||state.finished||!t||t.applied;
- $('nextRound').disabled=!state.started||state.finished||!t||!t.applied;
- $('eventText').textContent=t?(t.event||'Mercado estable. Planifica tu operación.'):'Crea un equipo para comenzar.';
- $('decisionResult').classList.toggle('hidden',!t||!t.lastResult);
- $('decisionResult').textContent=t&&t.lastResult?t.lastResult:'';
- $('leaderboard').innerHTML=state.teams.length?state.teams.slice().sort((a,b)=>b.score-a.score).map((x,i)=>`<div class="team"><div><b>${i+1}. ${esc(x.name)}</b><br><small>${esc(x.company)} · Ronda ${x.rounds||0}</small></div><strong>${Math.round(x.score)} pts</strong></div>`).join(''):'<div style="color:var(--muted);font-size:12px">Aún no hay equipos registrados.</div>';
- renderLog();save();
-}
-function renderLog(){$('log').innerHTML=state.logs.map(x=>`<div>${esc(x)}</div>`).join('')||'<div>Sin operaciones registradas.</div>'}
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-$('createTeam').onclick=()=>{
- let name=$('teamname').value.trim()||'Equipo '+(state.teams.length+1),company=$('company').value.trim()||'Mi empresa';
- if(state.teams.some(t=>t.name.toLowerCase()===name.toLowerCase())){alert('Ya existe un equipo con ese nombre.');return}
- state.teams.push({name,company,sector:$('sector').value,members:$('members').value,money:500,stock:0,orders:0,rep:70,score:0,rounds:0,applied:false,lastResult:'',event:'Mercado estable. Tu empresa está lista para operar.'});
- state.active=state.teams.length-1;log('Se creó '+name+' para administrar '+company+'.');render();
-};
-$('startGame').onclick=()=>{if(!state.teams.length){alert('Primero crea al menos una empresa/equipo.');return}state.started=true;state.finished=false;state.round=1;state.teams.forEach(t=>{t.applied=false;t.rounds=0});log('¡Comienza la competencia empresarial!');render()};
-$('teamSelect').onchange=e=>{state.active=Number(e.target.value);render()};
-$('applyDecisions').onclick=()=>{
- const t=active();if(!t||t.applied)return;
- const buy=$('buy').value,prod=$('produce').value,inv=$('inventory').value,trans=$('transport').value;
- const buyCost={balanced:45,cheap:32,fast:58}[buy],supply={balanced:600,cheap:450,fast:700}[buy];
- const prodQty={normal:500,high:750,low:300}[prod],prodCost={normal:35,high:52,low:24}[prod];
- const invCost={standard:8,lean:4,buffer:13}[inv],transCost={road:18,express:27,economy:12}[trans];
- const demand=500+Math.floor(Math.random()*201),delivery={road:0.88,express:0.98,economy:0.70}[trans],quality={balanced:0.94,cheap:0.84,fast:0.91}[buy];
- let cashCost=buyCost+prodCost+invCost+transCost;
- let produced=Math.min(prodQty,supply),total=t.stock+produced;
- let shipped=Math.min(demand,total),onTime=Math.round(shipped*delivery),lost=demand-shipped;
- let revenue=onTime*0.15,penalty=lost*0.025,profit=revenue-cashCost-penalty;
- t.money+=profit;t.stock=Math.max(0,total-shipped);t.orders=lost;
- t.rep=Math.max(0,Math.min(100,Math.round(t.rep+(onTime/demand*12)-(lost/demand*20)+(quality-.9)*20)));
- t.score+=Math.max(0,profit*1.2+onTime*.025+(t.rep-50)*.2);t.rounds++;t.applied=true;
- const eventRoll=Math.random();
- t.event=eventRoll<.25?'Alerta: se reporta congestión en un punto de distribución. Revisa tu estrategia de transporte.':eventRoll<.5?'Oportunidad: el mercado muestra demanda creciente para la próxima ronda.':'Mercado estable. Mantén el control de costos y servicio.';
- t.lastResult=`Demanda: ${demand} u. · Entregas a tiempo: ${onTime} u. · Unidades no atendidas: ${lost} u. · Costo operativo: ${fmt(cashCost)} · Resultado estimado: ${fmt(profit)}.`;
- log(`${t.name}: ${t.lastResult}`);render();
-};
-$('nextRound').onclick=()=>{
- const t=active();if(!t||!t.applied)return;
- const pending=state.teams.findIndex((x,i)=>i!==state.active&&!x.applied);
- if(pending!==-1){
-   state.active=pending;
-   log('Turno de '+active().name+' en la ronda '+state.round+'.');
-   render();return;
- }
- if(state.round>=10){state.finished=true;log('Partida finalizada: todos los equipos completaron las diez rondas. Exporta los resultados para evaluarlos.');render();alert('¡Partida finalizada! Revisa la clasificación y exporta los resultados.');return}
- state.round++;
- state.teams.forEach(x=>{x.applied=false;x.lastResult='';x.event='Nueva ronda: revisa demanda, inventario y capital antes de decidir.'});
- state.active=0;
- log('Todos los equipos completaron la ronda. Comienza la ronda '+state.round+'. Turno de '+active().name+'.');
- render();
-};
-$('saveGame').onclick=()=>{save();log('Avance guardado en este navegador.');render()};
-$('exportCSV').onclick=()=>{
- const header=['Equipo','Empresa','Sector','Integrantes','Rondas completadas','Capital (millones)','Inventario (unidades)','Pedidos pendientes','Reputacion','Puntuacion'];
- const rows=state.teams.map(t=>[t.name,t.company,t.sector,t.members,t.rounds||0,t.money,t.stock,t.orders,t.rep,Math.round(t.score)]);
- const quote=x=>'"'+String(x??'').replace(/"/g,'""')+'"';
- const csv='\uFEFF'+[header,...rows].map(row=>row.map(quote).join(';')).join('\r\n');
- const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
- a.href=url;a.download='supply-chain-challenge-resultados.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
-};
-$('resetGame').onclick=()=>{if(confirm('¿Reiniciar y borrar la partida guardada en este navegador?')){localStorage.removeItem(KEY);state={started:false,finished:false,round:1,teams:[],active:0,logs:[],events:[]};render()}};
-if(state.teams.length&&state.active>=state.teams.length)state.active=0;render();
-
-// Entorno industrial 3D con dos cámaras: panorámica y acercamiento
-(function(){
- const canvas=$('scene3d');
- if(!window.THREE){canvas.style.display='none';canvas.parentElement.style.background='linear-gradient(135deg,#456b55,#172d22)';return}
- const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
- renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
- const scene=new THREE.Scene();scene.background=new THREE.Color('#35466f');scene.fog=new THREE.Fog('#35466f',22,48);
- const camera=new THREE.PerspectiveCamera(38,1,.1,100);
- const overviewPos=new THREE.Vector3(13,13,17),detailPos=new THREE.Vector3(5.5,7.5,9);
- const overviewLook=new THREE.Vector3(0,0,0),detailLook=new THREE.Vector3(1,0,-1);
- let targetPos=overviewPos.clone(),targetLook=overviewLook.clone(),currentLook=overviewLook.clone();
- camera.position.copy(targetPos);camera.lookAt(currentLook);
- scene.add(new THREE.HemisphereLight(0xe5f3e8,0x344b3b,2));
- const sun=new THREE.DirectionalLight(0xfff4df,2.5);sun.position.set(-8,15,10);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);scene.add(sun);
- const mat=c=>new THREE.MeshStandardMaterial({color:c,roughness:.78});
- const concrete=mat('#c5ccd1'),road=mat('#424d48'),white=mat('#e4e9df'),green=mat('#7AB641'),roof=mat('#273475'),metal=mat('#71817a'),wood=mat('#a77d4e'),yellow=mat('#d9ad4f'),blue=mat('#ABB8C3');
- function block(x,y,z,w,h,d,m){const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;scene.add(o);return o}
- function cyl(x,y,z,r,h,m){const o=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,16),m);o.position.set(x,y,z);o.castShadow=true;scene.add(o)}
- block(0,-.28,0,23,.35,15,concrete);block(0,-.08,0,23,.06,15,mat('#7AB641'));
- block(0,-.035,1.5,22,.05,1.45,road);block(-2.8,-.025,-.5,1.25,.06,10,road);
- for(let x=-10;x<11;x+=2.2)block(x,0,1.5,.95,.018,.045,white);
- // Proveedor
- block(-7,.55,-3,3.1,1.1,2.5,green);block(-7,1.18,-3,3.2,.18,2.6,roof);
- for(let i=0;i<4;i++){block(-8.1+i*.65,.16,-1.15,.48,.3,.42,wood);block(-8.1+i*.65,.36,-1.15,.48,.08,.42,yellow)}
- // Planta de producción
- block(-2.3,.9,-3.3,4.2,1.8,3.2,mat('#e4e9ed'));block(-2.3,1.86,-3.3,4.35,.18,3.35,roof);
- block(-3.35,2.45,-3.7,.5,1.1,.55,metal);block(-1.4,2.25,-3.5,.45,.7,.45,metal);
- for(let x=-3.8;x<-.5;x+=.8)block(x,1.05,-1.67,.48,.55,.04,blue);
- // Almacén real: se carga desde assets/models/warehouse.glb en GitHub Pages.
- const warehouseMarker = $('scene3d').parentElement.querySelector('.scene-label');
- if (warehouseMarker) warehouseMarker.textContent = 'CARGANDO ALMACÉN INDUSTRIAL 3D...';
- if (THREE.GLTFLoader) {
-   const loader = new THREE.GLTFLoader();
-   loader.load('assets/models/warehouse.glb', function(gltf) {
-     const model = gltf.scene;
-     model.updateMatrixWorld(true);
-     const bounds = new THREE.Box3().setFromObject(model);
-     const size = bounds.getSize(new THREE.Vector3());
-     const center = bounds.getCenter(new THREE.Vector3());
-     const maxDim = Math.max(size.x, size.y, size.z) || 1;
-     const targetSize = 4.0;
-     model.scale.setScalar(targetSize / maxDim);
-     model.position.set(-center.x * model.scale.x + 3.6,
-                        -bounds.min.y * model.scale.y,
-                        -center.z * model.scale.z - 3.2);
-     model.traverse(function(node) {
-       if (node.isMesh) {
-         node.castShadow = true;
-         node.receiveShadow = true;
-       }
-     });
-     scene.add(model);
-     if (warehouseMarker) warehouseMarker.textContent = 'MODELO 3D DEL ALMACÉN CARGADO';
-   }, undefined, function(error) {
-     console.error('No se pudo cargar warehouse.glb:', error);
-     if (warehouseMarker) warehouseMarker.textContent = 'ALMACÉN 3D · REVISAR ARCHIVO';
-   });
- } else if (warehouseMarker) {
-   warehouseMarker.textContent = 'CARGADOR GLB NO DISPONIBLE';
- }
- // Racks y pallets auxiliares frente al muelle
- for(let row=0;row<2;row++)for(let col=0;col<3;col++){
-   let x=2.3+col*.85,z=-.5+row*.7;
-   block(x,.25,z,.58,.42,.5,wood);block(x,.62,z,.58,.28,.5,yellow);
- }
- // Patio de contenedores
- const cm=[mat('#273475'),mat('#6c7770'),mat('#8b6548'),mat('#7AB641')];
- for(let i=0;i<4;i++){let x=6.3+(i%2)*1.25,z=-.3+Math.floor(i/2)*1.45;block(x,.48,z,1.12,.95,1.28,cm[i]);for(let r=0;r<7;r++)block(x-.48+r*.16,.49,z-.66,.025,.85,.025,metal)}
- // Muelle, buque y grúa
- block(7.2,-.02,4.1,5.4,.22,2.2,mat('#596d66'));block(7.2,-.12,6.1,5.5,.1,2,mat('#315d70'));
- block(7.1,.34,4.25,3.1,.55,1.05,mat('#263d49'));block(7,.78,4.25,1.25,.36,.9,white);block(6.7,1.02,4.25,.65,.25,.9,blue);
- block(9.3,1.7,3.1,.18,3.3,.18,yellow);block(8.4,3.25,3.1,2.1,.18,.18,yellow);block(8.4,2.2,3.1,.12,2.1,.12,metal);
- // Camión
- block(-1,.38,1.45,1.75,.62,.78,green);block(-1.72,.53,1.45,.58,.78,.78,white);
- for(const x of [-1.62,-.85])for(const z of [1.02,1.88]){const w=new THREE.Mesh(new THREE.CylinderGeometry(.22,.22,.16,18),mat('#202a26'));w.rotation.z=Math.PI/2;w.position.set(x,.16,z);scene.add(w)}
- // Vegetación de borde
- for(let i=0;i<8;i++){let x=-10+i*2.8;cyl(x,.2,5.7,.09,.4,wood);const crown=new THREE.Mesh(new THREE.SphereGeometry(.48,10,8),mat('#7AB641'));crown.position.set(x,.72,5.7);scene.add(crown)}
- function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
- window.addEventListener('resize',resize);resize();
- $('overviewCam').onclick=()=>{targetPos=overviewPos.clone();targetLook=overviewLook.clone()};
- $('detailCam').onclick=()=>{targetPos=detailPos.clone();targetLook=detailLook.clone()};
- function animate(){requestAnimationFrame(animate);camera.position.lerp(targetPos,.04);currentLook.lerp(targetLook,.04);camera.lookAt(currentLook);renderer.render(scene,camera)}
- animate();
-})();
+const products={sacha:{name:"Sacha inchi",unitCost:18000,price:42000,raw:1.0,prodCost:7000},miel:{name:"Miel",unitCost:12000,price:30000,raw:1,prodCost:4500},yuca:{name:"Harina de yuca",unitCost:7000,price:22000,raw:1,prodCost:5000},rambutan:{name:"Rambután",unitCost:9000,price:28000,raw:1,prodCost:4000},caucho:{name:"Caucho natural",unitCost:16000,price:38000,raw:1,prodCost:6000},pescado:{name:"Pescado fresco",unitCost:14000,price:35000,raw:1,prodCost:5000}};
+const stages=["Compras","Producción","Almacén","Transporte","Entrega"];
+let g=null,step=0,choice={supplier:1,production:500,storage:1,transport:1};
+const fmt=n=>"$"+Math.round(n).toLocaleString("es-CO");
+function toast(s){let t=document.getElementById("toast");t.textContent=s;t.style.display="block";setTimeout(()=>t.style.display="none",2400)}
+function startGame(){let name=document.getElementById("company").value.trim();if(!name){toast("Escribe el nombre de tu empresa para comenzar.");return}
+let p=products[document.getElementById("product").value];g={name,team:document.getElementById("team").value||"Equipo sin nombre",product:p.name,productKey:document.getElementById("product").value,market:document.getElementById("market").value,cash:+document.getElementById("capital").value,initialCash:+document.getElementById("capital").value,stock:0,raw:0,round:1,totalRevenue:0,totalCost:0,totalServed:0,totalDemand:0,history:[],log:["Empresa creada. Capital inicial: "+fmt(+document.getElementById("capital").value)],decisions:{},roundData:{},finished:false};document.getElementById("welcome").style.display="none";document.getElementById("game").style.display="grid";step=0;choice={supplier:1,production:500,storage:1,transport:1};render();saveGame()}
+function goStep(n){step=n;render()}
+function render(){if(!g)return;let p=products[g.productKey];document.getElementById("companyTitle").textContent=g.name;document.getElementById("companyMeta").textContent=g.team+" · "+g.product+" · Mercado: "+g.market;document.getElementById("roundLabel").textContent=g.finished?"SIMULACIÓN FINALIZADA":"RONDA "+g.round+" DE 5";document.getElementById("cash").textContent=fmt(g.cash);document.getElementById("stock").textContent=g.stock+" u.";document.getElementById("served").textContent=(g.totalDemand?Math.round(g.totalServed/g.totalDemand*100):0)+"%";document.getElementById("profit").textContent=fmt(g.totalRevenue-g.totalCost);document.getElementById("log").innerHTML=g.log.slice(-7).reverse().map(x=>"• "+x).join("<br>");document.querySelectorAll("#stepnav button").forEach((b,i)=>b.classList.toggle("active",i===step));let demand=roundDemand();document.getElementById("marketOrder").innerHTML="<b>Demanda estimada · Ronda "+g.round+"</b>"+demand+" unidades de "+g.product+"<br>Precio de venta referencial: "+fmt(p.price)+" / unidad";drawStage()}
+function roundDemand(){return [450,600,520,750,680][g.round-1]||0}
+function drawStage(){let p=products[g.productKey],body=document.getElementById("stagebody");if(g.finished){body.innerHTML="<h3>Simulación terminada</h3><p>Consulta los resultados, revisa las decisiones y prepara la sustentación de tu empresa.</p><button class='dark' onclick='showReport()'>VER INFORME FINAL</button>";return}
+let common="<p>Ronda "+g.round+" de 5 · Toma una decisión, observa su efecto y continúa con la siguiente etapa.</p>";
+if(step===0){body.innerHTML="<h3>1. Compras y abastecimiento</h3>"+common+"<p>Selecciona un proveedor. El precio más bajo no siempre es la mejor decisión: considera el tiempo de entrega y la confiabilidad.</p><div class='choicegrid'>"+choiceCard("supplier",0,"Proveedor económico","Costo bajo · entrega lenta","0.88") + choiceCard("supplier",1,"Proveedor equilibrado","Costo medio · entrega estable","1.00")+choiceCard("supplier",2,"Proveedor confiable","Costo alto · entrega rápida","1.12")+"</div><div class='result'>Materia prima necesaria para producir: "+choice.production+" unidades. Costo unitario base: "+fmt(p.unitCost)+"</div><div class='actions'><button class='primary' onclick='applyPurchase()'>CONFIRMAR COMPRA</button></div>";}
+if(step===1){body.innerHTML="<h3>2. Producción</h3>"+common+"<p>Define cuántas unidades vas a fabricar. Producir más puede ayudarte a responder a la demanda, pero consume capital y capacidad.</p><label>Unidades a producir</label><input id='production' type='range' min='100' max='1000' step='50' value='"+choice.production+"' oninput='document.getElementById(\"prodval\").textContent=this.value'><div class='result'>Cantidad seleccionada: <b id='prodval'>"+choice.production+"</b> unidades. Costo de transformación estimado: "+fmt(p.prodCost)+" por unidad.</div><div class='actions'><button class='primary' onclick='applyProduction()'>PRODUCIR</button></div>";}
+if(step===2){body.innerHTML="<h3>3. Almacenamiento e inventario</h3>"+common+"<p>Escoge una política de almacenamiento. El inventario protege frente a la demanda, pero mantenerlo genera costos.</p><div class='choicegrid'>"+choiceCard("storage",0,"Inventario mínimo","Menor costo de almacenamiento · mayor riesgo de faltantes","0.5")+choiceCard("storage",1,"Inventario equilibrado","Balance entre disponibilidad y costo","1")+choiceCard("storage",2,"Inventario de seguridad","Más disponibilidad · mayor costo","1.6")+"</div><div class='result'>Inventario disponible actualmente: <b>"+g.stock+" unidades</b>.</div><div class='actions'><button class='primary' onclick='applyStorage()'>APLICAR POLÍTICA</button></div>";}
+if(step===3){body.innerHTML="<h3>4. Transporte y distribución</h3>"+common+"<p>Elige cómo llevar tu producto al mercado. El transporte afecta el costo logístico y el porcentaje de entregas a tiempo.</p><div class='choicegrid'>"+choiceCard("transport",0,"Terrestre","Menor costo en trayectos nacionales · tiempo medio","0.9")+choiceCard("transport",1,"Multimodal","Equilibrio entre costo y alcance internacional","1.15")+choiceCard("transport",2,"Aéreo","Mayor rapidez · costo elevado","1.8")+"</div><div class='result'>Mercado objetivo: <b>"+g.market+"</b>. Selecciona según el tipo de producto y el nivel de servicio esperado.</div><div class='actions'><button class='primary' onclick='applyTransport()'>CONFIRMAR TRANSPORTE</button></div>";}
+if(step===4){body.innerHTML="<h3>5. Entrega al cliente y cierre de ronda</h3>"+common+"<p>Revisa tu inventario y atiende el pedido del mercado. Las unidades no entregadas no generan ingresos; el transporte y almacenamiento se descuentan de tus recursos.</p><div class='result'>Demanda: <b>"+roundDemand()+" unidades</b><br>Inventario disponible: <b>"+g.stock+" unidades</b><br>Precio de venta: <b>"+fmt(p.price)+" / unidad</b></div><div class='actions'><button class='primary' onclick='closeRound()'>ENTREGAR PEDIDO Y CERRAR RONDA →</button></div>";}}
+function choiceCard(key,val,title,desc,factor){return "<button class='choice "+(choice[key]===val?"selected":"")+"' onclick='setChoice(\""+key+"\","+val+")'><strong>"+title+"</strong><span>"+desc+"</span></button>"}
+function setChoice(k,v){choice[k]=v;drawStage()}
+function applyPurchase(){let p=products[g.productKey],qty=choice.production;let mult=[.88,1,1.12][choice.supplier],cost=Math.round(qty*p.unitCost*mult);if(g.cash<cost){toast("Capital insuficiente. Reduce la producción o revisa tu caja.");return}g.cash-=cost;g.raw+=qty;g.roundData.purchase=cost;g.log.push("Compra de "+qty+" unidades de materia prima por "+fmt(cost));toast("Compra registrada.");goStep(1)}
+function applyProduction(){let p=products[g.productKey],qty=+document.getElementById("production").value;if(g.raw<qty){toast("No tienes materia prima suficiente. Regresa a Compras.");return}let cost=qty*p.prodCost;if(g.cash<cost){toast("No tienes capital suficiente para producir esa cantidad.");return}g.raw-=qty;g.stock+=qty;g.cash-=cost;g.roundData.production=cost;g.roundData.produced=qty;choice.production=qty;g.log.push("Producción: "+qty+" unidades. Costo: "+fmt(cost));toast("Producción completada.");goStep(2)}
+function applyStorage(){let fee=Math.round(g.stock*([3,6,10][choice.storage]));if(g.cash<fee){toast("No tienes capital para cubrir el almacenamiento.");return}g.cash-=fee;g.roundData.storage=fee;g.log.push("Política de inventario aplicada. Almacenamiento: "+fmt(fee));toast("Política de inventario aplicada.");goStep(3)}
+function applyTransport(){let demand=roundDemand(),ship=Math.min(g.stock,demand),base=products[g.productKey].price;let costPer=[1800,3600,8500][choice.transport],cost=ship*costPer;if(g.cash<cost){toast("Capital insuficiente para contratar este transporte.");return}g.cash-=cost;g.roundData.transport=cost;g.roundData.ship=ship;g.roundData.onTime=[.78,.91,.98][choice.transport];g.log.push("Transporte contratado para "+ship+" unidades. Costo: "+fmt(cost));toast("Transporte confirmado.");goStep(4)}
+function closeRound(){let p=products[g.productKey],d=roundDemand(),ship=Math.min(g.stock,d),rate=g.roundData.onTime??.75,onTime=Math.round(ship*rate),revenue=ship*p.price,penalty=(ship-onTime)*2500;g.stock-=ship;g.cash+=revenue-penalty;g.totalRevenue+=revenue;g.totalCost+=(g.roundData.purchase||0)+(g.roundData.production||0)+(g.roundData.storage||0)+(g.roundData.transport||0)+penalty;g.totalServed+=onTime;g.totalDemand+=d;let row={round:g.round,demand:d,shipped:ship,onTime,revenue,cost:g.totalCost-(g.history.reduce((a,x)=>a+x.cost,0)),cash:g.cash,stock:g.stock};g.history.push(row);g.log.push("Ronda "+g.round+": entregadas "+ship+"/"+d+" unidades; ingresos "+fmt(revenue)+"; penalización "+fmt(penalty));g.roundData={};if(g.round===5){g.finished=true;toast("¡Simulación finalizada! Revisa el informe de resultados.");}else{g.round++;choice={supplier:1,production:500,storage:1,transport:1};toast("Ronda cerrada. Analiza los resultados y continúa.");}saveGame();step=0;render()}
+function saveGame(){if(!g)return;localStorage.setItem("scc_unipaz_save",JSON.stringify({g,choice,step}));toast("Avance guardado en este navegador.");}
+function loadGame(){try{let s=JSON.parse(localStorage.getItem("scc_unipaz_save"));if(s&&s.g){g=s.g;choice=s.choice||choice;step=s.step||0;document.getElementById("welcome").style.display="none";document.getElementById("game").style.display="grid";render();toast("Partida recuperada.");}}catch(e){}}
+function newGame(){if(!confirm("¿Iniciar otra empresa? El avance guardado en este navegador será reemplazado."))return;localStorage.removeItem("scc_unipaz_save");location.reload()}
+function showGuide(){modal("<h2>¿Cómo se juega?</h2><p>Tu equipo administra una empresa durante cinco rondas. En cada ronda debe completar cinco etapas en orden:</p><ol><li><b>Compras:</b> seleccionar proveedor y adquirir materia prima.</li><li><b>Producción:</b> transformar materia prima en producto.</li><li><b>Almacén:</b> asumir costos y definir una política de inventario.</li><li><b>Transporte:</b> elegir modo y asumir su costo.</li><li><b>Entrega:</b> atender la demanda y cerrar la ronda.</li></ol><p>Las decisiones afectan el capital, inventario, costos, ventas y cumplimiento. Al finalizar, el equipo presenta sus resultados y explica qué decisiones funcionaron y cuáles debe mejorar.</p><div class='actions'><button class='dark' onclick='closeModal()'>ENTENDIDO</button></div>")}
+function showReport(){if(!g)return;let profit=g.totalRevenue-g.totalCost,service=g.totalDemand?Math.round(g.totalServed/g.totalDemand*100):0;let rows=g.history.map(x=>"<tr><td>"+x.round+"</td><td>"+x.demand+"</td><td>"+x.shipped+"</td><td>"+x.onTime+"</td><td>"+fmt(x.revenue)+"</td><td>"+fmt(x.cost)+"</td></tr>").join("");modal("<h2>Informe de desempeño</h2><p><b>"+g.name+"</b> · "+g.product+" · "+g.market+"</p><div class='grid2'><div class='result'>Ingresos acumulados<br><b>"+fmt(g.totalRevenue)+"</b></div><div class='result'>Resultado acumulado<br><b>"+fmt(profit)+"</b></div><div class='result'>Servicio a tiempo<br><b>"+service+"%</b></div><div class='result'>Capital disponible<br><b>"+fmt(g.cash)+"</b></div></div><h3>Resultados por ronda</h3><table><thead><tr><th>Ronda</th><th>Demanda</th><th>Enviadas</th><th>A tiempo</th><th>Ingresos</th><th>Costos ronda</th></tr></thead><tbody>"+rows+"</tbody></table><p class='hint'>Para la sustentación: expliquen cómo sus decisiones de compras, producción, inventario y transporte afectaron el resultado.</p><div class='actions'><button class='dark' onclick='closeModal()'>CERRAR</button><button class='secondary' onclick='exportData()'>EXPORTAR CSV</button></div>")}
+function modal(s){document.getElementById("modalContent").innerHTML=s;document.getElementById("modal").style.display="flex"}function closeModal(){document.getElementById("modal").style.display="none"}
+function exportData(){if(!g){toast("Primero crea una empresa.");return}let lines=[["Empresa",g.name],["Equipo",g.team],["Producto",g.product],["Mercado",g.market],["Capital inicial",g.initialCash],["Capital actual",g.cash],[],["Ronda","Demanda","Enviadas","A tiempo","Ingresos","Costos ronda","Inventario final"],...g.history.map(x=>[x.round,x.demand,x.shipped,x.onTime,x.revenue,x.cost,x.stock])];let csv=lines.map(r=>r.map(v=>'"'+String(v??"").replaceAll('"','""')+'"').join(";")).join("\n");let a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"}));a.download="informe_"+g.name.replace(/\s+/g,"_")+".csv";a.click();URL.revokeObjectURL(a.href)}
+// Three-dimensional industrial yard, built procedurally so the scene works without external assets.
+(function scene3d(){const c=document.getElementById("scene"),ctx=c.getContext("2d");let w,h,t=0;function resize(){w=c.width=innerWidth*devicePixelRatio;h=c.height=innerHeight*devicePixelRatio}addEventListener("resize",resize);resize();
+function poly(points,fill,stroke){ctx.beginPath();points.forEach((p,i)=>{let x=p[0]*w,y=p[1]*h;i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.closePath();ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.stroke()}}
+function line(a,b,color,width=1){ctx.beginPath();ctx.moveTo(a[0]*w,a[1]*h);ctx.lineTo(b[0]*w,b[1]*h);ctx.strokeStyle=color;ctx.lineWidth=width*devicePixelRatio;ctx.stroke()}
+function rect(x,y,ww,hh,col){ctx.fillStyle=col;ctx.fillRect(x*w,y*h,ww*w,hh*h)}
+function draw(){t+=.003;ctx.clearRect(0,0,w,h);let sky=ctx.createLinearGradient(0,0,0,h);sky.addColorStop(0,"#182b43");sky.addColorStop(.55,"#486274");sky.addColorStop(1,"#182c35");ctx.fillStyle=sky;ctx.fillRect(0,0,w,h);
+poly([[0,.58],[.5,.43],[1,.58],[1,1],[0,1]],"#344b50");poly([[0,.69],[.5,.54],[1,.69],[1,1],[0,1]],"#5b6863");
+for(let i=0;i<12;i++){let x=i*.095-.03;line([x,.69],[.5+(x-.5)*1.8,.98],"#91a09a44",1)}
+// warehouse body
+poly([[.42,.34],[.78,.43],[.78,.72],[.42,.61]],"#d8e0e3");poly([[.42,.34],[.56,.22],[.91,.32],[.78,.43]],"#f0f3f4");poly([[.78,.43],[.91,.32],[.91,.61],[.78,.72]],"#899ba5");
+for(let i=0;i<5;i++){let x=.46+i*.061;poly([[x,.39+i*.015],[x+.043,.402+i*.015],[x+.043,.57+i*.018],[x,.557+i*.018]],i%2?"#31516a":"#263f55");line([x,.39+i*.015],[x,.557+i*.018],"#b8c5ca66")}
+for(let i=0;i<6;i++){line([.48+i*.06,.3+i*.017],[.75+i*.045,.38+i*.018],"#a7b5bd",1)}
+// dock awnings
+for(let i=0;i<4;i++){let x=.49+i*.071;poly([[x,.58+i*.021],[x+.052,.595+i*.021],[x+.052,.615+i*.021],[x,.6+i*.021]],"#273475");rect(x*w,.60*h,.052*w,.09*h,"#203849");rect((x+.008)*w,.62*h,.036*w,.052*h,"#526c79")}
+ // road and lane marks
+poly([[.06,.82],[.5,.65],[1,.8],[1,1],[0,1]],"#27363a");for(let i=0;i<7;i++){let x=.1+i*.14;poly([[x,.91-i*.025],[x+.045,.895-i*.025],[x+.07,.9-i*.025],[x+.025,.918-i*.025]],"#d6d7c4")}
+ // truck
+let bob=Math.sin(t*2)*.002;poly([[.12,.73+bob],[.24,.69+bob],[.32,.72+bob],[.32,.81+bob],[.12,.85+bob]],"#e6edf0");poly([[.12,.73+bob],[.24,.69+bob],[.24,.78+bob],[.12,.82+bob]],"#fff");poly([[.24,.69+bob],[.32,.72+bob],[.32,.81+bob],[.24,.78+bob]],"#7ab641");poly([[.32,.72+bob],[.37,.73+bob],[.39,.78+bob],[.39,.84+bob],[.32,.81+bob]],"#273475");poly([[.34,.74+bob],[.37,.75+bob],[.38,.78+bob],[.34,.78+bob]],"#a9c4d2");for(let x of [.17,.3,.36]){ctx.beginPath();ctx.arc(x*w,(.83+bob)*h,.014*w,0,Math.PI*2);ctx.fillStyle="#101820";ctx.fill();ctx.beginPath();ctx.arc(x*w,(.83+bob)*h,.006*w,0,Math.PI*2);ctx.fillStyle="#aab5bc";ctx.fill()}
+ // stacked containers
+for(let i=0;i<3;i++){let x=.83+i*.045,y=.67-i*.022;poly([[x,y],[x+.075,y+.02],[x+.075,y+.11],[x,y+.09]],i%2?"#315b76":"#7ab641");for(let j=1;j<5;j++)line([x+j*.015,y+j*.004],[x+j*.015,y+.094+j*.004],"#ffffff40")}
+ // lighting
+for(let i=0;i<3;i++){let x=.39+i*.24;line([x,.22],[x,.49],"#d4d9d5",2);ctx.beginPath();ctx.arc(x*w,.22*h,5*devicePixelRatio,0,Math.PI*2);ctx.fillStyle="#f7edc4";ctx.fill()}
+requestAnimationFrame(draw)}draw()})();
+loadGame();
 </script>
 </body>
 </html>
