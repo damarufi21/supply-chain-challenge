@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supply Chain Challenge | Prototipo</title>
+<style>
+:root{--bg:#0b1220;--panel:#121e31;--panel2:#17263d;--line:#263b58;--text:#eef5ff;--muted:#9fb1c9;--cyan:#48d6d0;--gold:#ffc66d;--green:#76d6a1;--red:#ff8585}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0%,#18304a 0,#0b1220 42%);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif}
+header{padding:20px clamp(16px,4vw,48px);display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #263b58;background:#0b1220cc;position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)}
+.brand{display:flex;gap:12px;align-items:center}.logo{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#48d6d0,#477be8);display:grid;place-items:center;font-size:22px;color:#071321;font-weight:900}.brand h1{font-size:16px;letter-spacing:1.5px;margin:0}.brand small{color:var(--muted)}
+main{max-width:1200px;margin:auto;padding:26px clamp(14px,3vw,34px) 60px}.hero{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:22px}.eyebrow{color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase}.hero h2{font-size:clamp(26px,4vw,42px);margin:8px 0}.hero p{color:var(--muted);max-width:650px;line-height:1.5;margin:0}.pill{border:1px solid #3a5976;border-radius:999px;padding:8px 12px;color:#b8d7f0;font-size:12px;white-space:nowrap}
+.grid{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}.panel{background:linear-gradient(160deg,#17263d,#101b2d);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 14px 35px #0002}.panel h3{margin:0 0 14px;font-size:15px}.scene{height:300px;position:relative;overflow:hidden;border-radius:14px;background:linear-gradient(180deg,#1b4560,#122a43 62%,#102236);border:1px solid #31516a}
+#scene3d{width:100%;height:100%;display:block}.scene-label{position:absolute;left:14px;top:12px;background:#081725bb;padding:8px 11px;border:1px solid #42627b;border-radius:9px;font-size:11px;color:#d9f6ff}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.metric{background:#0d1929;border:1px solid #243a55;border-radius:12px;padding:12px}.metric small{display:block;color:var(--muted);font-size:11px}.metric strong{display:block;font-size:20px;margin-top:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{margin:12px 0}.field label{display:block;color:#b8c9dc;font-size:12px;margin-bottom:6px}.field input,.field select{width:100%;padding:11px 12px;background:#0b1727;border:1px solid #34506d;border-radius:9px;color:var(--text);font-size:14px}
+button{border:0;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,#48d6d0,#70e0b2);color:#071b25}button.secondary{background:#223650;color:#e8f3ff;border:1px solid #3a5674}button.warn{background:#5b3e27;color:#ffe0ae;border:1px solid #8a633b}button:disabled{opacity:.45;cursor:not-allowed}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.team-list{display:grid;gap:9px}.team{display:flex;justify-content:space-between;align-items:center;background:#0d1929;border:1px solid #263d58;border-radius:11px;padding:11px 12px}.team b{font-size:13px}.team small{color:var(--muted)}
+.hidden{display:none!important}.section{margin-top:18px}.stage-list{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}.stage{background:#0d1929;border:1px solid #263d58;border-radius:12px;padding:12px;min-height:95px}.stage span{font-size:20px}.stage b{display:block;font-size:12px;margin:7px 0 3px}.stage small{color:var(--muted);font-size:10px;line-height:1.35}
+.notice{border-left:3px solid var(--gold);padding:10px 12px;background:#342b1d66;color:#f8ddb0;border-radius:0 9px 9px 0;font-size:12px;line-height:1.5}
+.roundbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.roundbar strong{font-size:20px}.decision{display:grid;grid-template-columns:1fr 1fr;gap:12px}.decision-card{background:#0d1929;border:1px solid #2b4561;border-radius:12px;padding:14px}.decision-card h4{margin:0 0 8px}.decision-card p{font-size:12px;color:var(--muted);line-height:1.45}.decision-card select{width:100%;padding:10px;background:#14243a;color:white;border:1px solid #34506d;border-radius:8px}
+.log{max-height:180px;overflow:auto;font-size:12px;color:#c4d3e4;line-height:1.6}.log div{border-bottom:1px solid #263b58;padding:6px 0}
+footer{color:#7890aa;font-size:11px;text-align:center;margin-top:28px}
+@media(max-width:850px){.grid{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}.stage-list{grid-template-columns:repeat(2,1fr)}.decision{grid-template-columns:1fr}.hero{display:block}.pill{display:inline-block;margin-top:12px}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo">SC</div><div><h1>SUPPLY CHAIN CHALLENGE</h1><small>Laboratorio de simulación empresarial</small></div></div><div class="pill">PROTOTIPO 0.1 · PARTIDA PERSISTENTE</div></header>
+<main>
+<section class="hero"><div><div class="eyebrow">Build it · Move it · Deliver it</div><h2>Dirige tu cadena.<br><span style="color:var(--cyan)">Conquista el mercado.</span></h2><p>Administra una empresa completa: abastece, produce, almacena, transporta y entrega. Cada decisión afecta el dinero, el tiempo y la satisfacción de tus clientes.</p></div><div class="pill">Modo aula + modo equipos (base local)</div></section>
+<div class="grid">
+ <section class="panel">
+  <h3>🌐 Tu ecosistema logístico</h3>
+  <div class="scene"><canvas id="scene3d"></canvas><div class="scene-label">VISTA 3D · CADENA DE SUMINISTRO</div></div>
+  <div class="metrics">
+   <div class="metric"><small>Capital disponible</small><strong id="money">$500 M</strong></div>
+   <div class="metric"><small>Inventario</small><strong id="stock">0 u.</strong></div>
+   <div class="metric"><small>Pedidos pendientes</small><strong id="orders">0</strong></div>
+   <div class="metric"><small>Reputación</small><strong id="rep">70/100</strong></div>
+  </div>
+ </section>
+ <section class="panel">
+  <h3>🏢 Configuración de la partida</h3>
+  <div id="setup">
+   <div class="field"><label>Nombre de la empresa</label><input id="company" value="EcoNova Industries" maxlength="32"></div>
+   <div class="field"><label>Sector de operación</label><select id="sector"><option>Alimentos y agroindustria</option><option>Manufactura</option><option>Comercio y distribución</option><option>Tecnología y electrónica</option><option>Textil y confecciones</option><option>Personalizado / multisector</option></select></div>
+   <div class="two"><div class="field"><label>Nombre del equipo</label><input id="teamname" value="Equipo 1" maxlength="24"></div><div class="field"><label>Integrantes</label><input id="members" placeholder="Nombres separados por coma"></div></div>
+   <div class="actions"><button id="createTeam">Crear empresa / equipo</button><button class="secondary" id="startGame">Iniciar partida</button></div>
+   <p style="font-size:11px;color:var(--muted);line-height:1.5">La partida se guarda en este navegador. Puedes crear varios equipos y jugar por turnos desde el mismo computador.</p>
+  </div>
+  <div id="gameInfo" class="hidden">
+   <div class="roundbar"><div><small style="color:var(--muted)">RONDA ACTUAL</small><br><strong id="round">1 / 10</strong></div><div class="pill" id="activeTeam">Equipo 1</div></div>
+   <div class="field"><label>Empresa activa</label><select id="teamSelect"></select></div>
+   <div class="notice" id="eventText">Mercado estable. Es momento de planificar tu operación.</div>
+   <div class="actions"><button id="nextRound">Cerrar ronda y avanzar</button><button class="secondary" id="saveGame">Guardar avance</button></div>
+   <div class="actions"><button class="warn" id="resetGame">Reiniciar partida</button></div>
+  </div>
+ </section>
+</div>
+<section class="panel section">
+ <h3>🧭 Áreas de la cadena de suministro</h3>
+ <div class="stage-list">
+  <div class="stage"><span>🤝</span><b>1. Abastecimiento</b><small>Proveedores, compras y aprovisionamiento.</small></div>
+  <div class="stage"><span>🏭</span><b>2. Producción</b><small>Capacidad, programación y calidad.</small></div>
+  <div class="stage"><span>📦</span><b>3. Almacenamiento</b><small>Inventarios, espacio y rotación.</small></div>
+  <div class="stage"><span>🚚</span><b>4. Transporte</b><small>Rutas, modos y costos logísticos.</small></div>
+  <div class="stage"><span>🛒</span><b>5. Distribución</b><small>Pedidos, entregas y servicio al cliente.</small></div>
+ </div>
+</section>
+<section class="panel section" id="decisions">
+ <h3>🎯 Centro de decisiones</h3>
+ <p style="color:var(--muted);font-size:13px;margin-top:-5px">Inicia una partida para habilitar las decisiones operativas de cada ronda.</p>
+ <div class="decision">
+  <div class="decision-card"><h4>🤝 Abastecimiento</h4><p>Selecciona una estrategia de compra. Un proveedor económico puede implicar mayor plazo o riesgo.</p><select id="buy"><option value="balanced">Compra equilibrada · $45 M</option><option value="cheap">Compra económica · $32 M</option><option value="fast">Compra urgente · $58 M</option></select></div>
+  <div class="decision-card"><h4>🏭 Producción</h4><p>Define el ritmo de fabricación según capacidad, inventario y demanda.</p><select id="produce"><option value="normal">Producción normal · 500 unidades</option><option value="high">Producción intensiva · 750 unidades</option><option value="low">Producción reducida · 300 unidades</option></select></div>
+  <div class="decision-card"><h4>📦 Inventarios</h4><p>Elige cómo administrar el almacenamiento y el riesgo de faltantes.</p><select id="inventory"><option value="standard">Control estándar · costo $8 M</option><option value="lean">Inventario ajustado · costo $4 M</option><option value="buffer">Stock de seguridad · costo $13 M</option></select></div>
+  <div class="decision-card"><h4>🚚 Transporte y distribución</h4><p>Prioriza el costo o la velocidad para cumplir con los pedidos.</p><select id="transport"><option value="road">Carretera · costo $18 M · 4 días</option><option value="express">Exprés · costo $27 M · 2 días</option><option value="economy">Consolidado · costo $12 M · 7 días</option></select></div>
+ </div>
+ <div class="actions"><button id="applyDecisions" disabled>Aplicar decisiones de esta ronda</button></div>
+ <div id="decisionResult" class="notice hidden" style="margin-top:12px"></div>
+</section>
+<div class="grid section">
+ <section class="panel"><h3>🏆 Clasificación empresarial</h3><div id="leaderboard" class="team-list"><div style="color:var(--muted);font-size:12px">Aún no hay equipos registrados.</div></div></section>
+ <section class="panel"><h3>📋 Bitácora de operaciones</h3><div id="log" class="log"><div>Bienvenido. Crea tu primera empresa para comenzar.</div></div></section>
+</div>
+<footer>Prototipo académico · Valores ficticios para fines de aprendizaje · La modalidad en línea entre distintos dispositivos se incorporará en una siguiente fase.</footer>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script>
+const KEY='scc_prototype_01';
+let state=JSON.parse(localStorage.getItem(KEY)||'null')||{started:false,round:1,teams:[],active:0,logs:[],events:[]};
+const $=id=>document.getElementById(id);
+const fmt=n=>'$'+Math.round(n).toLocaleString('es-CO')+' M';
+function log(msg){state.logs.unshift('R'+state.round+' · '+msg);state.logs=state.logs.slice(0,30);renderLog()}
+function save(){localStorage.setItem(KEY,JSON.stringify(state));}
+function active(){return state.teams[state.active]}
+function render(){
+ const t=active();
+ $('setup').classList.toggle('hidden',state.started);
+ $('gameInfo').classList.toggle('hidden',!state.started);
+ $('money').textContent=t?fmt(t.money):'$500 M';$('stock').textContent=(t?t.stock:0).toLocaleString('es-CO')+' u.';
+ $('orders').textContent=t?t.orders:0;$('rep').textContent=(t?t.rep:70)+'/100';
+ $('round').textContent=state.round+' / 10';
+ $('activeTeam').textContent=t?t.name:'Sin equipo';
+ $('teamSelect').innerHTML=state.teams.map((x,i)=>`<option value="${i}" ${i===state.active?'selected':''}>${x.name}</option>`).join('');
+ $('applyDecisions').disabled=!state.started||!t||t.applied;
+ $('nextRound').disabled=!state.started||!t||!t.applied;
+ $('eventText').textContent=t?(t.event||'Mercado estable. Planifica tu operación.'):'Crea un equipo para comenzar.';
+ $('decisionResult').classList.toggle('hidden',!t||!t.lastResult);
+ $('decisionResult').textContent=t&&t.lastResult?t.lastResult:'';
+ $('leaderboard').innerHTML=state.teams.length?state.teams.slice().sort((a,b)=>b.score-a.score).map((x,i)=>`<div class="team"><div><b>${i+1}. ${esc(x.name)}</b><br><small>${esc(x.company)} · Ronda ${x.rounds||0}</small></div><strong>${Math.round(x.score)} pts</strong></div>`).join(''):'<div style="color:var(--muted);font-size:12px">Aún no hay equipos registrados.</div>';
+ renderLog();save();
+}
+function renderLog(){$('log').innerHTML=state.logs.map(x=>`<div>${esc(x)}</div>`).join('')||'<div>Sin operaciones registradas.</div>'}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+$('createTeam').onclick=()=>{
+ let name=$('teamname').value.trim()||'Equipo '+(state.teams.length+1),company=$('company').value.trim()||'Mi empresa';
+ if(state.teams.some(t=>t.name.toLowerCase()===name.toLowerCase())){alert('Ya existe un equipo con ese nombre.');return}
+ state.teams.push({name,company,sector:$('sector').value,members:$('members').value,money:500,stock:0,orders:0,rep:70,score:0,rounds:0,applied:false,lastResult:'',event:'Mercado estable. Tu empresa está lista para operar.'});
+ state.active=state.teams.length-1;log('Se creó '+name+' para administrar '+company+'.');render();
+};
+$('startGame').onclick=()=>{if(!state.teams.length){alert('Primero crea al menos una empresa/equipo.');return}state.started=true;state.round=1;state.teams.forEach(t=>{t.applied=false;t.rounds=0});log('¡Comienza la competencia empresarial!');render()};
+$('teamSelect').onchange=e=>{state.active=Number(e.target.value);render()};
+$('applyDecisions').onclick=()=>{
+ const t=active();if(!t||t.applied)return;
+ const buy=$('buy').value,prod=$('produce').value,inv=$('inventory').value,trans=$('transport').value;
+ const buyCost={balanced:45,cheap:32,fast:58}[buy],supply={balanced:600,cheap:450,fast:700}[buy];
+ const prodQty={normal:500,high:750,low:300}[prod],prodCost={normal:35,high:52,low:24}[prod];
+ const invCost={standard:8,lean:4,buffer:13}[inv],transCost={road:18,express:27,economy:12}[trans];
+ const demand=500+Math.floor(Math.random()*201),delivery={road:0.88,express:0.98,economy:0.70}[trans],quality={balanced:0.94,cheap:0.84,fast:0.91}[buy];
+ let cashCost=buyCost+prodCost+invCost+transCost;
+ let available=t.stock+supply,produced=Math.min(prodQty,available),total= t.stock+produced;
+ let shipped=Math.min(demand,total),onTime=Math.round(shipped*delivery),lost=demand-shipped;
+ let revenue=onTime*0.15,penalty=lost*0.025,profit=revenue-cashCost-penalty;
+ t.money+=profit;t.stock=Math.max(0,total-shipped);t.orders=lost;
+ t.rep=Math.max(0,Math.min(100,Math.round(t.rep+(onTime/demand*12)-(lost/demand*20)+(quality-.9)*20)));
+ t.score+=Math.max(0,profit*1.2+onTime*.025+(t.rep-50)*.2);t.rounds++;t.applied=true;
+ const eventRoll=Math.random();
+ t.event=eventRoll<.25?'Alerta: se reporta congestión en un punto de distribución. Revisa tu estrategia de transporte.':eventRoll<.5?'Oportunidad: el mercado muestra demanda creciente para la próxima ronda.':'Mercado estable. Mantén el control de costos y servicio.';
+ t.lastResult=`Demanda: ${demand} u. · Entregas a tiempo: ${onTime} u. · Unidades no atendidas: ${lost} u. · Costo operativo: ${fmt(cashCost)} · Resultado estimado: ${fmt(profit)}.`;
+ log(`${t.name}: ${t.lastResult}`);render();
+};
+$('nextRound').onclick=()=>{
+ const t=active();if(!t||!t.applied)return;
+ const pending=state.teams.findIndex((x,i)=>i!==state.active&&!x.applied);
+ if(pending!==-1){
+   state.active=pending;
+   log('Turno de '+active().name+' en la ronda '+state.round+'.');
+   render();return;
+ }
+ if(state.round>=10){alert('La partida llegó a su ronda final. Revisa la clasificación.');return}
+ state.round++;
+ state.teams.forEach(x=>{x.applied=false;x.lastResult='';x.event='Nueva ronda: revisa demanda, inventario y capital antes de decidir.'});
+ state.active=0;
+ log('Todos los equipos completaron la ronda. Comienza la ronda '+state.round+'. Turno de '+active().name+'.');
+ render();
+};
+$('saveGame').onclick=()=>{save();log('Avance guardado en este navegador.');render()};
+$('resetGame').onclick=()=>{if(confirm('¿Reiniciar y borrar la partida guardada en este navegador?')){localStorage.removeItem(KEY);state={started:false,round:1,teams:[],active:0,logs:[],events:[]};render()}};
+if(state.teams.length&&state.active>=state.teams.length)state.active=0;render();
+
+// Isometric 3D scene (with graceful fallback if the CDN is unavailable)
+(function(){
+ const canvas=$('scene3d');if(!window.THREE){canvas.style.display='none';canvas.parentElement.style.background='linear-gradient(135deg,#28536b,#122a43)';return}
+ const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+ const scene=new THREE.Scene();const camera=new THREE.PerspectiveCamera(34,1,.1,100);camera.position.set(10,11,14);camera.lookAt(0,0,0);
+ scene.add(new THREE.HemisphereLight(0xd9f4ff,0x27435b,2));const light=new THREE.DirectionalLight(0xffffff,2.2);light.position.set(6,10,7);scene.add(light);
+ const mat=(c)=>new THREE.MeshStandardMaterial({color:c,roughness:.78});
+ const ground=new THREE.Mesh(new THREE.BoxGeometry(14,.25,8),mat('#24475b'));ground.position.y=-.25;scene.add(ground);
+ function block(x,y,z,w,h,d,c){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat(c));m.position.set(x,y,z);scene.add(m);return m}
+ // roads and logistics zones
+ block(0,-.105,0,13,.03,1.15,'#344b5b');block(-2,-.09,0,1.3,.04,7,'#344b5b');
+ // supplier
+ block(-5,.55,-2,2,1.1,1.8,'#d7a65a');block(-5,1.25,-2,.9,.3,1.8,'#f0ca83');
+ // factory
+ block(-1,.8,-2.1,2.5,1.6,2.2,'#5aa6a5');block(-1,1.75,-2.1,1.2,.35,1.2,'#b9e2d9');block(-1.3,2.35,-2.3,.35,.9,.35,'#607d91');
+ // warehouse
+ block(3,.65,-2,2.1,1.3,2,'#6d8fc2');block(3,1.4,-2,2.2,.2,2.1,'#9db7df');
+ // loading pallets
+ for(let i=0;i<4;i++){block(2.4+i*.42,.2,-.7,.32,.35,.32,'#d7ad72')}
+ // port & ship
+ block(5,.1,2.3,3,.25,2,'#657d8c');block(5,.45,2.3,2,.55,.8,'#dce8ed');block(5,.85,2.3,1.2,.3,.7,'#e8a65d');
+ // truck
+ block(-1,.35,2.5,1.7,.55,.7,'#48d6d0');block(-1.65,.55,2.5,.55,.65,.7,'#b7edf0');
+ for(let i=0;i<6;i++){let wheel=new THREE.Mesh(new THREE.CylinderGeometry(.22,.22,.13,16),mat('#101820'));wheel.rotation.z=Math.PI/2;wheel.position.set(-1.55+i*.0,.15,2.88);scene.add(wheel)}
+ // small trees / lights
+ for(let i=0;i<5;i++){let trunk=new THREE.Mesh(new THREE.CylinderGeometry(.07,.1,.45,7),mat('#8d6748'));trunk.position.set(-6+i*2.8,.15,3.1);scene.add(trunk);let top=new THREE.Mesh(new THREE.ConeGeometry(.38,.85,7),mat('#62b58c'));top.position.set(-6+i*2.8,.72,3.1);scene.add(top)}
+ let tick=0;function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}window.addEventListener('resize',resize);resize();
+ function animate(){requestAnimationFrame(animate);tick+=.003;scene.rotation.y=Math.sin(tick)*.025;renderer.render(scene,camera)}animate();
+})();
+</script>
+</body>
+</html>
